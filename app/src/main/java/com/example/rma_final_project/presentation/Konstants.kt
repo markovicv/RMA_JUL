@@ -8,5 +8,8 @@ class Konstants {
         val MIN_TEMP_DETAIL = "Minimalna dnevna: "
         val WIND_SPEED = "Brzina vetra: "
         val HUMIDITY = "Vlaznost: "
+        val EMPTY = "Nisu sva polja popunjena"
+        val LIMIT = "Ne moze preko 10"
+        val KELVIN_TO_C = 273
     }
 }

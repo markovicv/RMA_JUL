@@ -18,6 +18,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var lat:Double = 0.0
     private var lon:Double = 0.0
+    private var currentCity:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val weather = intent.getParcelableExtra("DETAILS")as WeatherDomain
         lat = weather.lat
         lon = weather.lon
+        currentCity = weather.city
         cityDetailsId.setText(weather.city)
         dateDetailsId.setText(weather.date)
         maxTempId.setText(Konstants.NAX_TEMP_DETAIL+weather.max_temperature)
@@ -53,9 +55,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val city = LatLng(lat,lon)
-
-        mMap.addMarker(MarkerOptions().position(city).title("aa"))
-       //mMap.moveCamera(CameraUpdateFactory.newLatLng(city))
+        mMap.addMarker(MarkerOptions().position(city).title(currentCity))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(city, 12.0f))
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rma_final_project.MapsActivity
 import com.example.rma_final_project.R
+import com.example.rma_final_project.presentation.Konstants
 import com.example.rma_final_project.presentation.adapter.WeatherForecastAdapter
 import com.example.rma_final_project.presentation.contract.WeatherContract
 import com.example.rma_final_project.presentation.state.WeatherState
@@ -37,6 +38,14 @@ class MainActivity : AppCompatActivity() {
         })
 
         btnPrikaz.setOnClickListener {
+            if(etPlace.text.toString().isNullOrBlank() || etDays.text.toString().isNullOrBlank()){
+                Toast.makeText(this,Konstants.EMPTY,Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if(Integer.parseInt(etDays.text.toString())>10){
+                Toast.makeText(this,Konstants.LIMIT,Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             weatherForecastViewModel.getWeatherByCity(etPlace.text.toString(),Integer.parseInt(etDays.text.toString()))
             weatherForecastViewModel.fetchWeatherByCity(etPlace.text.toString(),Integer.parseInt(etDays.text.toString()))
         }
